@@ -1,0 +1,35 @@
+.Navbar{
+    background-color: #007bff;
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.Navbar1{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.AppHeading{
+    margin: 0;
+    color: #fff;
+}
+
+.Button{
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    height: 35px;
+    width: 116px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.Button:hover{
+    background-color: #fff;
+    color: #000;
+}
