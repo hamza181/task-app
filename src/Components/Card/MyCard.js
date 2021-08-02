@@ -9,9 +9,9 @@ import {
 
 const { Meta } = Card;
 
-function MyCard() {
+function MyCard(props) {
   return (
-    <div>
+    <div style={{display: "flex", msFlexDirection: "row"}}>
       <Card
         style={{ width: 300,
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
@@ -32,8 +32,8 @@ function MyCard() {
           avatar={
             <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           }
-          title="Card title"
-          description="This is the description"
+          title={props.name}
+          description={props.description}
         />
       </Card>
     </div>

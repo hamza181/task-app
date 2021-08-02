@@ -6,9 +6,11 @@ import {
   Upload,
 } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
 
 function MyForm() {
 
+  const dispatch = useDispatch()
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Form
@@ -17,7 +19,7 @@ function MyForm() {
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           paddingTop: "45px",
           paddingBottom: "30px",
-          marginTop: '33px'
+          margin: '33px 0',
         }}
         labelCol={{
           span: 5,
