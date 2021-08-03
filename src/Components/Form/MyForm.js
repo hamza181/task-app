@@ -3,13 +3,14 @@ import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { addNote } from "../../Store/action/note";
+import { Redirect, useHistory } from "react-router-dom";
 
 function MyForm() {
   const dispatch = useDispatch();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [image, setImage] = useState();
-  
+  const history = useHistory()
 
   function addNotes() {
     const body = {
@@ -19,6 +20,9 @@ function MyForm() {
     }
 
     dispatch(addNote(body))
+
+    history.push(`/`)
+
   }
 
   return (

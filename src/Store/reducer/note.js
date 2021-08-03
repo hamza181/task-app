@@ -1,3 +1,4 @@
+import { deleteNote } from "../action/note";
 import * as constant from "../constant/note";
 
 const initialState = {
@@ -8,37 +9,35 @@ const initialState = {
       description: "My description",
       image: "asdf",
     },
-    {
-      id: 2,
-      name: "Task2",
-      description: "My des",
-      image: "oasidf",
-    },
-    {
-      id: 3,
-      name: "Task3",
-      description: "My des",
-      image: "oasidf",
-    },
-    {
-      id: 4,
-      name: "Task4",
-      description: "My des",
-      image: "oasidf",
-    },
+    // {
+    //   id: 2,
+    //   name: "Task2",
+    //   description: "My des",
+    //   image: "oasidf",
+    // },
+    // {
+    //   id: 3,
+    //   name: "Task3",
+    //   description: "My des",
+    //   image: "oasidf",
+    // },
+    // {
+    //   id: 4,
+    //   name: "Task4",
+    //   description: "My des",
+    //   image: "oasidf",
+    // },
   ],
-  counter: 4,
   particularNote: null,
 };
 
 export const note = (state = initialState, action) => {
   if (action.type === constant.ADDNOTE) {
-    const tempPayload = { ...action.payload, id: state.counter + 1 };
+    const tempPayload = { ...action.payload, id: state.notes.length + 1 };
     const newNotes = [...state.notes, tempPayload];
     return {
       ...state,
       notes: newNotes,
-      counter: state.counter + 1,
     };
   }
   if (action.type === constant.GETNOTE) {
@@ -51,10 +50,13 @@ export const note = (state = initialState, action) => {
       particularNote: getParticularNote,
     };
   }
-  if(action.type === constant.DELETENOTE){
-    console.log('delete note');
-    return {}
-
+  if (action.type === constant.DELETENOTE) {
+    const deletedNote = state.notes.filter((ele) => ele.id != action.payload);
+    console.log(state);
+    return {
+      ...state,
+      notes: deletedNote
+    };
   }
 
   return state;

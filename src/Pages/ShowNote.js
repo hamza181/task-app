@@ -2,18 +2,26 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Card } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import MyForm from "../Components/Form/MyForm";
 import Navbar from "../Layout/Header/Navbar/Navbar";
-import { getParticularNote } from "../Store/action/note";
+import { deleteNote, getParticularNote } from "../Store/action/note";
 
 function ShowNote() {
 
   // get id of route --- note/id
   let {id} = useParams()
+  const history = useHistory()
 
   const dispatch = useDispatch()
   const getNode = useSelector(state => state.note.particularNote)
+
+  function deleteNotes(){
+    // console.log('delete');
+    dispatch(deleteNote(id))
+    history.push(`/`)
+
+  }
 
   useEffect(() => {
       dispatch(getParticularNote(id))
@@ -70,7 +78,7 @@ function ShowNote() {
               <Button type="primary" size="large" icon={<EditOutlined />}>
                 Edit
               </Button>
-              <Button type="danger" size="large" icon={<DeleteOutlined />}>
+              <Button type="danger" size="large" icon={<DeleteOutlined />} onClick={deleteNotes}>
                 Delete
               </Button>
             </div>

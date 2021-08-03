@@ -8,19 +8,26 @@ import {
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { deleteNote } from "../../Store/action/note";
+import { useHistory } from "react-router-dom";
 
 const { Meta } = Card;
 
 function MyCard(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const dispatch = useDispatch()
+  function deleteNotes(e) {
+    e.stopPropagation();
+    // console.log('delete');
+    dispatch(deleteNote(props.id))
+  }
   return (
-    <div style={{marginBottom: '50px'}}>
+    <div style={{ marginBottom: "50px" }}>
       <Card
-        style={{ 
+        style={{
           width: 300,
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-         }}
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+        }}
         // cover={
         //   <img
         //     alt="example"
@@ -28,10 +35,14 @@ function MyCard(props) {
         //   />
         // }
         actions={[
-        //   <SettingOutlined key="setting" />,
+          //   <SettingOutlined key="setting" />,
           <EditOutlined key="edit" />,
-          <DeleteOutlined key='delete'/>,
+          <DeleteOutlined key="delete" onClick={deleteNotes} />,
         ]}
+        onClick={() => {
+          console.log(props.id);
+          history.push(`/note/${props.id}`);
+        }}
       >
         <Meta
           avatar={
@@ -39,6 +50,7 @@ function MyCard(props) {
           }
           title={props.name}
           description={props.description}
+          id={props.id}
         />
       </Card>
     </div>

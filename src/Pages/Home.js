@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MyCard from "../Components/Card/MyCard";
 import Navbar from "../Layout/Header/Navbar/Navbar";
+import { deleteNote } from "../Store/action/note";
 
 function Home() {
   const myState = useSelector((state) => state.note.notes);
+  const dispatch = useDispatch();
   const [isStateEmpty, setIsStateEmpty] = useState(false);
+  const [abc, setabc] = useState(myState)
+  
   return (
     <div>
       <Navbar></Navbar>
@@ -22,16 +26,15 @@ function Home() {
         >
           {!isStateEmpty ? (
             <>
-              {myState.map((value, index) => {
+              {myState?.map((value, index) => {
                 return (
-                  <Link to={`/note/${index + 1}`}>
-                    <MyCard
-                      key={index + 1}
-                      name={myState[index].name}
-                      description={myState[index].description}
-                      image="asdf"
-                    />
-                  </Link>
+                  <MyCard
+                    key={index + 1}
+                    id={myState[index].id}
+                    name={myState[index].name}
+                    description={myState[index].description}
+                    image="asdf"
+                  />
                 );
               })}
             </>
