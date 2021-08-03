@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/add-note">
           <AddNote />
         </Route>
-        <Route path="/note">
+        <Route path="/note/:id">
           <ShowNote />
         </Route>
       </Switch>

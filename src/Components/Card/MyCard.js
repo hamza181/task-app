@@ -6,14 +6,19 @@ import {
   SettingOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { deleteNote } from "../../Store/action/note";
 
 const { Meta } = Card;
 
 function MyCard(props) {
+
+  const dispatch = useDispatch()
   return (
-    <div style={{display: "flex", msFlexDirection: "row"}}>
+    <div style={{marginBottom: '50px'}}>
       <Card
-        style={{ width: 300,
+        style={{ 
+          width: 300,
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
          }}
         // cover={
@@ -25,7 +30,7 @@ function MyCard(props) {
         actions={[
         //   <SettingOutlined key="setting" />,
           <EditOutlined key="edit" />,
-          <DeleteOutlined key='delete' />,
+          <DeleteOutlined key='delete'/>,
         ]}
       >
         <Meta

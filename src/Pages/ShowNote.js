@@ -1,19 +1,31 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Card } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import MyForm from "../Components/Form/MyForm";
 import Navbar from "../Layout/Header/Navbar/Navbar";
+import { getParticularNote } from "../Store/action/note";
 
 function ShowNote() {
+
+  // get id of route --- note/id
+  let {id} = useParams()
+
+  const dispatch = useDispatch()
+  const getNode = useSelector(state => state.note.particularNote)
+
+  useEffect(() => {
+      dispatch(getParticularNote(id))
+  }, [])
   return (
     <div>
       <Navbar></Navbar>
-      {/* <h1>show note</h1> */}
       <div
         style={{ display: "flex", justifyContent: "center" }}
       >
         <Card
-          title="Name"
+          title={getNode?.name}
           style={{
             width: "80%",
             margin: "30px 0",
@@ -29,7 +41,7 @@ function ShowNote() {
               }
             }
           >
-            Description here
+            {getNode?.description}
           </Card>
           <div
             style={{ marginTop: 25, display: "flex", justifyContent: "center" }}

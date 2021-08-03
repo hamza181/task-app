@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Upload,
-} from "antd";
+import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+import { addNote } from "../../Store/action/note";
 
 function MyForm() {
+  const dispatch = useDispatch();
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [image, setImage] = useState();
+  
 
-  const dispatch = useDispatch()
+  function addNotes() {
+    const body = {
+      name: name,
+      description: description,
+      image: image
+    }
+
+    dispatch(addNote(body))
+  }
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Form
@@ -19,7 +29,7 @@ function MyForm() {
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           paddingTop: "45px",
           paddingBottom: "30px",
-          margin: '33px 0',
+          margin: "33px 0",
         }}
         labelCol={{
           span: 5,
@@ -31,11 +41,14 @@ function MyForm() {
         size="large"
       >
         <Form.Item label="Name">
-          <Input />
+          <Input onChange={(e) => setName(e.target.value)} />
         </Form.Item>
 
         <Form.Item label="Description">
-          <Input.TextArea rows={8} />
+          <Input.TextArea
+            rows={8}
+            onChange={(e) => setDescription(e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -51,7 +64,9 @@ function MyForm() {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 5 }}>
-          <Button type="primary">Add Note</Button>
+          <Button type="primary" onClick={addNotes}>
+            Add Note
+          </Button>
         </Form.Item>
       </Form>
     </div>

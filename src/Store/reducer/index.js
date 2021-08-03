@@ -3,6 +3,6 @@ import { counter } from "./counter";
 import { note } from "./note";
 
 export const reducer = combineReducers({
-    counter: counter,
-    note: note,
-})
+  counter: counter,
+  note: note,
+});
