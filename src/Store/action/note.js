@@ -7,9 +7,11 @@ export function addNote(body) {
   };
 }
 
-export function editNote() {
+export function editNote(body) {
+  // console.log(body);
   return {
     type: constant.EDITNOTE,
+    payload: body,
   };
 }
 

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
-import { addNote } from "../../Store/action/note";
-import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addNote, editNote } from "../../Store/action/note";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 
 function MyForm() {
   const dispatch = useDispatch();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
+  const myState = useSelector(state => state.note.notes)
+  const {id} = useParams()
+  const [name, setName] = useState(myState[id]?.name);
+  const [description, setDescription] = useState(myState[id]?.description);
   const [image, setImage] = useState();
   const history = useHistory()
-
+  console.log(id);
+  // console.log(myState[id-1]?.name);
   function addNotes() {
     const body = {
       name: name,
@@ -23,6 +26,19 @@ function MyForm() {
 
     history.push(`/`)
 
+  }
+
+  function editNotes() {
+    const body = {
+      id: id,
+      name: name,
+      description: description,
+      image: image
+    }
+
+    dispatch(editNote(body))
+    // console.log(body);
+    history.push(`/`)
   }
 
   return (
@@ -45,13 +61,18 @@ function MyForm() {
         size="large"
       >
         <Form.Item label="Name">
-          <Input onChange={(e) => setName(e.target.value)} />
+          <Input onChange={(e) => setName(e.target.value)} 
+          value={name}
+
+          />
         </Form.Item>
 
         <Form.Item label="Description">
           <Input.TextArea
             rows={8}
             onChange={(e) => setDescription(e.target.value)}
+            // value={myState[id-1]?.description}
+            value={description}
           />
         </Form.Item>
 
@@ -68,9 +89,13 @@ function MyForm() {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 5 }}>
-          <Button type="primary" onClick={addNotes}>
+        {
+          id ? (<><Button type="primary" onClick={editNotes}>
+            Edit Note
+          </Button></>):(<><Button type="primary" onClick={addNotes}>
             Add Note
-          </Button>
+          </Button></>)
+          }
         </Form.Item>
       </Form>
     </div>

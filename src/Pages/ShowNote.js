@@ -23,6 +23,11 @@ function ShowNote() {
 
   }
 
+  function editNotes(){
+    // console.log('edit');
+    history.push(`/edit-note/${id}`)
+  }
+
   useEffect(() => {
       dispatch(getParticularNote(id))
   }, [])
@@ -75,7 +80,7 @@ function ShowNote() {
                 width: "30%",
               }}
             >
-              <Button type="primary" size="large" icon={<EditOutlined />}>
+              <Button type="primary" size="large" icon={<EditOutlined />} onClick={editNotes}>
                 Edit
               </Button>
               <Button type="danger" size="large" icon={<DeleteOutlined />} onClick={deleteNotes}>

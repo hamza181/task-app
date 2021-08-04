@@ -8,8 +8,6 @@ import { deleteNote } from "../Store/action/note";
 function Home() {
   const myState = useSelector((state) => state.note.notes);
   const dispatch = useDispatch();
-  const [isStateEmpty, setIsStateEmpty] = useState(false);
-  const [abc, setabc] = useState(myState)
   
   return (
     <div>
@@ -24,7 +22,9 @@ function Home() {
             gap: "8.3%",
           }}
         >
-          {!isStateEmpty ? (
+        
+          {
+            myState.length > 0 ? (
             <>
               {myState?.map((value, index) => {
                 return (

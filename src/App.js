@@ -22,6 +22,9 @@ function App() {
         <Route path="/note/:id">
           <ShowNote />
         </Route>
+        <Route exact path="/edit-note/:id">
+          <AddNote />
+        </Route>
       </Switch>
     </Router>
   );

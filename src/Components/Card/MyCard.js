@@ -14,13 +14,20 @@ const { Meta } = Card;
 
 function MyCard(props) {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useHistory()
 
   function deleteNotes(e) {
     e.stopPropagation();
     // console.log('delete');
     dispatch(deleteNote(props.id))
   }
+
+  function editNotes(e){
+    e.stopPropagation();
+    console.log('edit');
+    history.push(`/edit-note/${props.id}`)
+  }
+
   return (
     <div style={{ marginBottom: "50px" }}>
       <Card
@@ -36,7 +43,7 @@ function MyCard(props) {
         // }
         actions={[
           //   <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
+          <EditOutlined key="edit" onClick={editNotes}/>,
           <DeleteOutlined key="delete" onClick={deleteNotes} />,
         ]}
         onClick={() => {
