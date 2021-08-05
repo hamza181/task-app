@@ -31,11 +31,10 @@ const initialState = {
   particularNote: null,
 };
 
-
 export const note = (state = initialState, action) => {
   if (action.type === constant.ADDNOTE) {
     const id = new Date().getTime();
-    
+
     const tempPayload = { ...action.payload, id: id + 1 };
     const newNotes = [...state.notes, tempPayload];
     return {
@@ -65,10 +64,10 @@ export const note = (state = initialState, action) => {
     console.log(action.payload);
     const array = [...state.notes];
     const newNote = array.filter((e) => e.id == action.payload.id);
+
     newNote[0].name = action.payload.name;
     newNote[0].description = action.payload.description;
     newNote[0].image = action.payload.image;
-    console.log(newNote);
 
     // array.splice(kis index par update karna ha, index update k bad kitne element remove karne hen, new element )
     // array.splice(action.payload.id - 1, 1, newNote[0]);
