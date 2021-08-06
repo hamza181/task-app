@@ -8,7 +8,7 @@ import { deleteNote } from "../Store/action/note";
 function Home() {
   const myState = useSelector((state) => state.note.notes);
   const dispatch = useDispatch();
-  
+
   return (
     <div>
       <Navbar></Navbar>
@@ -22,9 +22,7 @@ function Home() {
             gap: "8.3%",
           }}
         >
-        
-          {
-            myState.length > 0 ? (
+          {myState.length > 0 ? (
             <>
               {myState?.map((value, index) => {
                 return (

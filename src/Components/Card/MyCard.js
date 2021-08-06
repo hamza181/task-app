@@ -1,31 +1,28 @@
-import React from "react";
-import { Card, Avatar } from "antd";
 import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-  DeleteOutlined,
+  DeleteOutlined, EditOutlined
 } from "@ant-design/icons";
+import { Avatar, Card } from "antd";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteNote } from "../../Store/action/note";
 import { useHistory } from "react-router-dom";
+import { deleteNote } from "../../Store/action/note";
 
 const { Meta } = Card;
 
 function MyCard(props) {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   function deleteNotes(e) {
     e.stopPropagation();
     // console.log('delete');
-    dispatch(deleteNote(props.id))
+    dispatch(deleteNote(props.id));
   }
 
-  function editNotes(e){
+  function editNotes(e) {
     e.stopPropagation();
-    console.log('edit');
-    history.push(`/edit-note/${props.id}`)
+    console.log("edit");
+    history.push(`/edit-note/${props.id}`);
   }
 
   return (
@@ -43,7 +40,7 @@ function MyCard(props) {
         // }
         actions={[
           //   <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" onClick={editNotes}/>,
+          <EditOutlined key="edit" onClick={editNotes} />,
           <DeleteOutlined key="delete" onClick={deleteNotes} />,
         ]}
         onClick={() => {

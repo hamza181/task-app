@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Upload } from "antd";
+import { Form, Input, message, Button, Upload } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote, editNote } from "../../Store/action/note";
 import { Redirect, useHistory, useParams } from "react-router-dom";
+import axios from "axios";
 
 function MyForm() {
   const dispatch = useDispatch();
@@ -28,6 +29,10 @@ function MyForm() {
   }, [id]);
   // console.log(myState[id-1]?.name);
   function addNotes() {
+
+    // for image upload
+    // axios.post('')
+
     const body = {
       name: name,
       description: description,
@@ -53,6 +58,29 @@ function MyForm() {
   }
   console.log({ name });
   console.log({ description });
+
+  // for upload
+
+  const upload = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info);
+        // console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Form
@@ -88,11 +116,11 @@ function MyForm() {
         <Form.Item
           name="upload"
           label="Upload"
-          valuePropName="fileList"
+          // valuePropName="fileList"
           //   getValueFromEvent={normFile}
           //   extra="longgggggggggggggggggggggggggggggggggg"
         >
-          <Upload name="logo" action="/upload.do" listType="picture">
+          <Upload {...upload}>
             <Button icon={<UploadOutlined />}>Click to upload</Button>
           </Upload>
         </Form.Item>
