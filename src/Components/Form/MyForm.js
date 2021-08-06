@@ -16,6 +16,7 @@ function MyForm() {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [image, setImage] = useState();
+  const [imageSelected, setImageSelected] = useState();
   const history = useHistory();
   console.log(id);
   useEffect(() => {
@@ -30,8 +31,18 @@ function MyForm() {
   // console.log(myState[id-1]?.name);
   function addNotes() {
 
+    console.log(imageSelected);
     // for image upload
-    // axios.post('')
+    const formData = new FormData();
+    formData.append('file', imageSelected)
+    // formData.append('upload_preset', 'bbszzbrb')
+
+    // api not working
+    axios.post('https://api.cloudinary.com/v1_1/hamza1811/upload', formData).then((response)=>{
+      console.log(response);
+    })
+    
+    // for image upload
 
     const body = {
       name: name,
@@ -69,7 +80,8 @@ function MyForm() {
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {
-        console.log(info);
+        console.log(info.file);
+        setImageSelected(info.file)
         // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
